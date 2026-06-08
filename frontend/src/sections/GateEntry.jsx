@@ -16,8 +16,8 @@ export default function GateEntry({ data }) {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white">Gate Entry Date Integrity</h2>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">Vendor Bill Date ≤ GE Date ≤ GRPO Date ≤ AP Date rule</p>
+        <h2 className="text-xl font-bold app-title">Gate Entry Date Integrity</h2>
+        <p className="text-sm app-muted mt-0.5">Vendor Bill Date ≤ GE Date ≤ GRPO Date ≤ AP Date rule</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
@@ -27,16 +27,16 @@ export default function GateEntry({ data }) {
           { label: 'Exceptions',     value: kpis.exceptions,    color: 'text-rose-600' },
           { label: 'Integrity',      value: `${kpis.integrity_pct ?? 0}%`, color: 'text-emerald-600' },
         ].map(k => (
-          <div key={k.label} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-4">
-            <div className="text-[10px] font-medium text-slate-600 dark:text-slate-300 uppercase">{k.label}</div>
-            <div className={`text-xl font-bold ${k.color || 'text-slate-900 dark:text-white'}`}>{k.value ?? '—'}</div>
+          <div key={k.label} className="app-card rounded-xl border p-4">
+            <div className="text-[10px] font-medium app-label uppercase">{k.label}</div>
+            <div className={`text-xl font-bold ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Pass vs Exception</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-4">Pass vs Exception</h3>
           <div className="flex items-center justify-center mb-4">
             <DonutChart
               segments={(pve.segments || []).map(s => ({
@@ -59,8 +59,8 @@ export default function GateEntry({ data }) {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Detailed Checks</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-4">Detailed Checks</h3>
           <div className="space-y-2">
             {checks.map(c => {
               const colors = {
@@ -70,8 +70,8 @@ export default function GateEntry({ data }) {
               }
               return (
                 <div key={c.label} className="flex items-center gap-3">
-                  <span className="text-xs text-slate-600 dark:text-slate-400 w-36">{c.label}</span>
-                  <div className="flex-1 bg-gray-100 dark:bg-slate-800 rounded-full h-5 overflow-hidden">
+                  <span className="text-xs app-muted w-36">{c.label}</span>
+                  <div className="flex-1 app-track rounded-full h-5 overflow-hidden">
                     <div className={`h-full rounded-full ${colors[c.label] || 'bg-slate-400'}`}
                       style={{ width: `${Math.max(c.pct, 0.3)}%` }} />
                   </div>

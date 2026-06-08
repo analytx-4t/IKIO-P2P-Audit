@@ -44,31 +44,31 @@ export default function DataMap() {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white">Data Map, Joins &amp; Audit Logic</h2>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">Source files, process flow, table joins, and audit rules</p>
+        <h2 className="text-xl font-bold app-title">Data Map, Joins &amp; Audit Logic</h2>
+        <p className="text-sm app-muted mt-0.5">Source files, process flow, table joins, and audit rules</p>
       </div>
 
       {/* Source Files */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 overflow-hidden mb-6">
-        <div className="px-6 py-4 border-b border-gray-200 dark:border-slate-700">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Source Files Used in Audit</h3>
+      <div className="app-card rounded-xl border overflow-hidden mb-6">
+        <div className="px-6 py-4 border-b app-divider">
+          <h3 className="text-sm font-semibold app-title">Source Files Used in Audit</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 dark:bg-slate-800">
+            <thead className="app-subtle">
               <tr>
                 {['File','Purpose','Records','Key Columns'].map(h => (
-                  <th key={h} className="text-left px-4 py-3 text-[10px] font-semibold text-slate-600 dark:text-slate-300 uppercase">{h}</th>
+                  <th key={h} className="text-left px-4 py-3 text-[10px] font-semibold app-label uppercase">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
               {SOURCE_FILES.map(r => (
                 <tr key={r.file}>
-                  <td className="px-4 py-3 font-medium text-slate-900 dark:text-white text-[11px]">{r.file}</td>
-                  <td className="px-4 py-3 text-slate-600 dark:text-slate-400 text-[11px]">{r.purpose}</td>
+                  <td className="px-4 py-3 font-medium app-title text-[11px]">{r.file}</td>
+                  <td className="px-4 py-3 app-muted text-[11px]">{r.purpose}</td>
                   <td className="px-4 py-3 text-right font-semibold dark:text-white text-[11px]">{r.records}</td>
-                  <td className="px-4 py-3 text-slate-600 dark:text-slate-400 text-[11px] hidden lg:table-cell">{r.keys}</td>
+                  <td className="px-4 py-3 app-muted text-[11px] hidden lg:table-cell">{r.keys}</td>
                 </tr>
               ))}
             </tbody>
@@ -78,17 +78,17 @@ export default function DataMap() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         {/* P2P Process Flow */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">P2P Process Flow</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-3">P2P Process Flow</h3>
           <div className="space-y-2">
             {PROCESS_FLOW.map(s => {
               const bg = s.c === 'brand' ? 'bg-brand-600' : s.c === 'indigo' ? 'bg-indigo-500' : 'bg-slate-500'
               return (
-                <div key={s.n} className="flex items-center gap-3 p-2 bg-gray-50 dark:bg-slate-800 rounded-lg">
+                <div key={s.n} className="flex items-center gap-3 p-2 app-subtle rounded-lg">
                   <span className={`w-6 h-6 rounded-full ${bg} text-white text-xs font-bold flex items-center justify-center flex-shrink-0`}>{s.n}</span>
                   <div>
-                    <div className="text-xs font-semibold text-slate-900 dark:text-white">{s.title}</div>
-                    <div className="text-[10px] text-slate-600 dark:text-slate-400">{s.desc}</div>
+                    <div className="text-xs font-semibold app-title">{s.title}</div>
+                    <div className="text-[10px] app-muted">{s.desc}</div>
                   </div>
                 </div>
               )
@@ -97,16 +97,16 @@ export default function DataMap() {
         </div>
 
         {/* Joins */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 overflow-hidden">
-          <div className="px-5 py-4 border-b border-gray-200 dark:border-slate-700">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Table-to-Table Joins</h3>
+        <div className="app-card rounded-xl border overflow-hidden">
+          <div className="px-5 py-4 border-b app-divider">
+            <h3 className="text-sm font-semibold app-title">Table-to-Table Joins</h3>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 dark:bg-slate-800">
+              <thead className="app-subtle">
                 <tr>
                   {['ID','A','B','Key'].map(h => (
-                    <th key={h} className="text-left px-4 py-2 text-[10px] font-semibold text-slate-600 dark:text-slate-300 uppercase">{h}</th>
+                    <th key={h} className="text-left px-4 py-2 text-[10px] font-semibold app-label uppercase">{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -114,9 +114,9 @@ export default function DataMap() {
                 {JOINS.map(j => (
                   <tr key={j.id}>
                     <td className="px-4 py-2"><span className="text-xs font-semibold text-brand-600">{j.id}</span></td>
-                    <td className="px-4 py-2 text-[11px] text-slate-800 dark:text-white">{j.a}</td>
-                    <td className="px-4 py-2 text-[11px] text-slate-600 dark:text-slate-400">{j.b}</td>
-                    <td className="px-4 py-2 text-[11px] text-slate-600 dark:text-slate-400 font-mono hidden md:table-cell">{j.key}</td>
+                    <td className="px-4 py-2 text-[11px] app-title">{j.a}</td>
+                    <td className="px-4 py-2 text-[11px] app-muted">{j.b}</td>
+                    <td className="px-4 py-2 text-[11px] app-muted font-mono hidden md:table-cell">{j.key}</td>
                   </tr>
                 ))}
               </tbody>
@@ -126,15 +126,15 @@ export default function DataMap() {
       </div>
 
       {/* Audit Logic */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-        <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Audit Logic Applied (A-J)</h3>
+      <div className="app-card rounded-xl border p-5">
+        <h3 className="text-sm font-semibold app-title mb-3">Audit Logic Applied (A-J)</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {AUDIT_RULES.map(r => (
-            <div key={r.id} className="flex items-start gap-2 p-2 rounded bg-gray-50 dark:bg-slate-800">
+            <div key={r.id} className="flex items-start gap-2 p-2 rounded app-subtle">
               <span className="w-5 h-5 rounded bg-brand-600 text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0">{r.id}</span>
               <div>
-                <div className="text-xs font-semibold text-slate-900 dark:text-white">{r.title}</div>
-                <div className="text-[10px] text-slate-600 dark:text-slate-400">{r.desc}</div>
+                <div className="text-xs font-semibold app-title">{r.title}</div>
+                <div className="text-[10px] app-muted">{r.desc}</div>
               </div>
             </div>
           ))}

@@ -30,14 +30,14 @@ export default function Appendix() {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white">Appendix &amp; Technical Notes</h2>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">Methodology, data sources, and risk legend for the IKIO P2P Audit</p>
+        <h2 className="text-xl font-bold app-title">Appendix &amp; Technical Notes</h2>
+        <p className="text-sm app-muted mt-0.5">Methodology, data sources, and risk legend for the IKIO P2P Audit</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         {/* Risk Legend */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Risk Classification Legend</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-3">Risk Classification Legend</h3>
           <div className="space-y-2 text-sm">
             {[
               { level: 'High Risk',    color: 'rose',  desc: 'Critical exceptions needing immediate action (e.g., 45-day MSME breaches, invoice without GE)' },
@@ -48,7 +48,7 @@ export default function Appendix() {
                 <span className={`w-2 h-2 rounded-full bg-${r.color}-500 shrink-0`} />
                 <div>
                   <span className={`font-medium text-${r.color}-700 dark:text-${r.color}-300`}>{r.level}</span>
-                  <p className="text-xs text-slate-600 dark:text-slate-400">{r.desc}</p>
+                  <p className="text-xs app-muted">{r.desc}</p>
                 </div>
               </div>
             ))}
@@ -56,8 +56,8 @@ export default function Appendix() {
         </div>
 
         {/* Data Sources */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Data Sources</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-3">Data Sources</h3>
           <div className="space-y-2 text-sm">
             {[
               { label: 'PO Data',        name: 'Purchase Orders' },
@@ -67,9 +67,9 @@ export default function Appendix() {
               { label: 'Vendor Master',  name: 'Vendor Database' },
               { label: 'GL Balances',    name: 'General Ledger' },
             ].map(d => (
-              <div key={d.label} className="flex items-center justify-between border-b border-gray-100 dark:border-slate-800 pb-1.5">
-                <span className="text-slate-600 dark:text-slate-400">{d.label}</span>
-                <span className="text-slate-900 dark:text-white font-medium">{d.name}</span>
+              <div key={d.label} className="flex items-center justify-between border-b app-divider pb-1.5">
+                <span className="app-muted">{d.label}</span>
+                <span className="app-title font-medium">{d.name}</span>
               </div>
             ))}
           </div>
@@ -77,8 +77,8 @@ export default function Appendix() {
       </div>
 
       {/* Audit Methodology */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-6 mb-6">
-        <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Audit Methodology</h3>
+      <div className="app-card rounded-xl border p-6 mb-6">
+        <h3 className="text-sm font-semibold app-title mb-4">Audit Methodology</h3>
         <div className="space-y-5">
           {[
             { n:1, title:'Data Extraction', body:'All six ERP datasets (PO, GRPO, GE, Purchase Register, GL, Vendor Master) loaded as-uploaded.' },
@@ -105,10 +105,10 @@ export default function Appendix() {
             <div key={step.n} className="flex gap-4">
               <div className="w-7 h-7 rounded-full bg-brand-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{step.n}</div>
               <div>
-                <div className="text-sm font-semibold text-slate-900 dark:text-white mb-1">{step.title}</div>
-                {step.body && <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{step.body}</p>}
+                <div className="text-sm font-semibold app-title mb-1">{step.title}</div>
+                {step.body && <p className="text-xs app-muted leading-relaxed">{step.body}</p>}
                 {step.bullets && (
-                  <ul className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed space-y-0.5 list-none">
+                  <ul className="text-xs app-muted leading-relaxed space-y-0.5 list-none">
                     {step.bullets.map(b => (
                       <li key={b} className="flex gap-1.5"><span className="text-brand-500 font-bold">•</span>{b}</li>
                     ))}
@@ -121,23 +121,23 @@ export default function Appendix() {
       </div>
 
       {/* Glossary */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 overflow-hidden mb-6">
-        <div className="px-6 py-4 border-b border-gray-200 dark:border-slate-700">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Glossary of Terms</h3>
+      <div className="app-card rounded-xl border overflow-hidden mb-6">
+        <div className="px-6 py-4 border-b app-divider">
+          <h3 className="text-sm font-semibold app-title">Glossary of Terms</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 dark:bg-slate-800">
+            <thead className="app-subtle">
               <tr>
-                <th className="text-left px-4 py-3 text-[10px] font-semibold text-slate-600 dark:text-slate-300 uppercase w-36">Term</th>
-                <th className="text-left px-4 py-3 text-[10px] font-semibold text-slate-600 dark:text-slate-300 uppercase">Definition</th>
+                <th className="text-left px-4 py-3 text-[10px] font-semibold app-label uppercase w-36">Term</th>
+                <th className="text-left px-4 py-3 text-[10px] font-semibold app-label uppercase">Definition</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
               {GLOSSARY.map(g => (
-                <tr key={g.term} className="hover:bg-gray-50/50 dark:hover:bg-slate-800/50">
-                  <td className="px-4 py-3 font-semibold text-slate-900 dark:text-white text-xs">{g.term}</td>
-                  <td className="px-4 py-3 text-slate-600 dark:text-slate-400 text-[11px]">{g.def}</td>
+                <tr key={g.term} className="app-row-hover">
+                  <td className="px-4 py-3 font-semibold app-title text-xs">{g.term}</td>
+                  <td className="px-4 py-3 app-muted text-[11px]">{g.def}</td>
                 </tr>
               ))}
             </tbody>
@@ -146,25 +146,25 @@ export default function Appendix() {
       </div>
 
       {/* Regulatory References */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-6 mb-6">
-        <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Regulatory References</h3>
+      <div className="app-card rounded-xl border p-6 mb-6">
+        <h3 className="text-sm font-semibold app-title mb-4">Regulatory References</h3>
         <div className="space-y-2.5">
           {REGULATIONS.map(r => (
-            <div key={r.title} className="flex gap-3 p-3 bg-gray-50 dark:bg-slate-800 rounded-lg">
+            <div key={r.title} className="flex gap-3 p-3 app-subtle rounded-lg">
               <span className="text-brand-500 font-bold text-xs mt-0.5 shrink-0">•</span>
               <div>
-                <span className="text-xs font-semibold text-slate-900 dark:text-white">{r.title}</span>
-                <span className="text-xs text-slate-600 dark:text-slate-400"> — {r.desc}</span>
+                <span className="text-xs font-semibold app-title">{r.title}</span>
+                <span className="text-xs app-muted"> — {r.desc}</span>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-6">
-        <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Report Preparation Notes</h3>
-        <p className="text-xs text-slate-600 dark:text-slate-400">
-          <span className="font-semibold text-slate-700 dark:text-slate-300">Data Period:</span> FY 2025-26 (January 2026 to March 2026).
+      <div className="app-card rounded-xl border p-6">
+        <h3 className="text-sm font-semibold app-title mb-4">Report Preparation Notes</h3>
+        <p className="text-xs app-muted">
+          <span className="font-semibold app-body">Data Period:</span> FY 2025-26 (January 2026 to March 2026).
         </p>
       </div>
     </>

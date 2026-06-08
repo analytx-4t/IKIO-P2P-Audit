@@ -5,10 +5,10 @@ import RiskTable from '../components/RiskTable'
 
 function Kpi({ label, value, sub, color }) {
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-4">
-      <div className="text-[10px] font-medium text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">{label}</div>
-      <div className={`text-xl font-bold ${color || 'text-slate-900 dark:text-white'}`}>{value ?? '—'}</div>
-      {sub && <div className="text-[11px] text-slate-600 dark:text-slate-400">{sub}</div>}
+    <div className="app-card rounded-xl border p-4">
+      <div className="text-[10px] font-medium app-label uppercase tracking-wider mb-1">{label}</div>
+      <div className={`text-xl font-bold ${color || 'app-title'}`}>{value ?? '—'}</div>
+      {sub && <div className="text-[11px] app-muted">{sub}</div>}
     </div>
   )
 }
@@ -29,8 +29,8 @@ export default function Executive({ data }) {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white">Executive Dashboard</h2>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">Key Performance Indicators, Charts, and Top Risks</p>
+        <h2 className="text-xl font-bold app-title">Executive Dashboard</h2>
+        <p className="text-sm app-muted mt-0.5">Key Performance Indicators, Charts, and Top Risks</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
@@ -46,8 +46,8 @@ export default function Executive({ data }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
         {/* PO Status donut */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">PO Status Distribution</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-3">PO Status Distribution</h3>
           <div className="flex items-center justify-center mb-4">
             <DonutChart
               segments={poSegs.map(s => ({ ...s, color: s.label === 'Open' ? '#ea580c' : '#22c55e' }))}
@@ -69,8 +69,8 @@ export default function Executive({ data }) {
         </div>
 
         {/* 3-Way match donut */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">3-Way Match Status</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-3">3-Way Match Status</h3>
           <div className="flex items-center justify-center mb-4">
             <DonutChart
               segments={twSegs}
@@ -92,8 +92,8 @@ export default function Executive({ data }) {
         </div>
 
         {/* Payment aging bars */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Payment Aging</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-3">Payment Aging</h3>
           <div className="space-y-2">
             {agingBars.map(b => (
               <BarRow key={b.label} label={b.label} value={b.value} pct={b.pct} color={`bg-[${b.color}]`} />

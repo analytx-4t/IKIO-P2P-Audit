@@ -15,8 +15,8 @@ export default function GlBalances({ data }) {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white">General Ledger Vendor Balances</h2>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">Outstanding, fully-paid, and advance vendor balances</p>
+        <h2 className="text-xl font-bold app-title">General Ledger Vendor Balances</h2>
+        <p className="text-sm app-muted mt-0.5">Outstanding, fully-paid, and advance vendor balances</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
@@ -26,16 +26,16 @@ export default function GlBalances({ data }) {
           { label: 'Advance/Debit', value: kpis.advance_cnt,     color: 'text-amber-600' },
           { label: 'Total Vendors', value: kpis.total_vendors },
         ].map(k => (
-          <div key={k.label} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-4">
-            <div className="text-[10px] font-medium text-slate-600 dark:text-slate-300 uppercase">{k.label}</div>
-            <div className={`text-xl font-bold ${k.color || 'text-slate-900 dark:text-white'}`}>{k.value ?? '—'}</div>
+          <div key={k.label} className="app-card rounded-xl border p-4">
+            <div className="text-[10px] font-medium app-label uppercase">{k.label}</div>
+            <div className={`text-xl font-bold ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Payment Status (Count)</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-4">Payment Status (Count)</h3>
           <div className="flex items-center justify-center mb-4">
             <DonutChart
               segments={ps.segments || []}
@@ -56,8 +56,8 @@ export default function GlBalances({ data }) {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Amount (₹ Crores)</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-4">Amount (₹ Crores)</h3>
           <div className="space-y-5 mt-6">
             {ab.map(b => (
               <div key={b.label}>
@@ -65,13 +65,13 @@ export default function GlBalances({ data }) {
                   <span>{b.label}</span>
                   <span className="font-semibold dark:text-white">₹{b.value_cr} Cr</span>
                 </div>
-                <div className="bg-gray-100 dark:bg-slate-800 rounded-full h-6 overflow-hidden">
+                <div className="app-track rounded-full h-6 overflow-hidden">
                   <div className={`h-full rounded-full ${b.label === 'Outstanding' ? 'bg-rose-500' : 'bg-amber-500'}`}
                     style={{ width: `${Math.max(b.pct, 1)}%` }} />
                 </div>
               </div>
             ))}
-            <div className="pt-3 border-t border-gray-100 dark:border-slate-700">
+            <div className="pt-3 border-t app-divider">
               <div className="flex justify-between text-sm font-bold">
                 <span>Net Liability</span>
                 <span className="text-rose-600">₹{kpis.net_liability_cr} Cr</span>

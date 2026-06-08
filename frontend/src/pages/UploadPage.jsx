@@ -68,13 +68,13 @@ export default function UploadPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-white to-orange-50 flex items-center justify-center p-4">
+    <div className="app-gradient-bg flex items-center justify-center p-4">
       <div className="w-full max-w-3xl">
         <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center w-32 h-32 mb-4">
             <img src={logo} alt="IKIO" className="w-28 h-28 object-contain" />
           </div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-3xl font-bold app-title tracking-tight">
             Upload Procurement Audit Data Files
           </h1>
         </div>
@@ -91,7 +91,7 @@ export default function UploadPage() {
             return (
               <div
                 key={role}
-                className="upload-zone group border-2 border-dashed border-slate-300 hover:border-orange-500 bg-white rounded-xl p-5 cursor-pointer transition-all shadow-sm hover:shadow-md"
+                className="upload-zone group app-card border-2 border-dashed hover:border-orange-500 rounded-xl p-5 cursor-pointer transition-all shadow-sm hover:shadow-md"
                 onClick={() => inputRefs.current[role]?.click()}
                 onDrop={e => handleDrop(role, e)}
                 onDragOver={handleDragOver}
@@ -105,23 +105,23 @@ export default function UploadPage() {
                   onChange={e => handleFile(role, e.target.files[0])}
                 />
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-lg app-subtle flex items-center justify-center flex-shrink-0">
                     {file ? (
                       <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
                         <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.086l3.75-5.25z" clipRule="evenodd"/>
                       </svg>
                     ) : (
-                      <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 app-faint" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d={icon} />
                       </svg>
                     )}
                   </div>
                   <div className="min-w-0">
-                    <div className="text-sm font-medium text-slate-800">{label}</div>
+                    <div className="text-sm font-medium app-title">{label}</div>
                     {file ? (
                       <div className="text-xs text-emerald-500 truncate">{file.name}</div>
                     ) : (
-                      <div className="text-xs text-slate-500">Click to upload (.xlsx, .xls, .csv)</div>
+                      <div className="text-xs app-faint">Click to upload (.xlsx, .xls, .csv)</div>
                     )}
                   </div>
                 </div>
@@ -131,7 +131,7 @@ export default function UploadPage() {
         </div>
 
         <div className="flex flex-col items-center gap-3">
-          <div className="text-xs text-slate-600">
+          <div className="text-xs app-muted">
             <span>{fileCount}</span> / 6 files uploaded
           </div>
           <button

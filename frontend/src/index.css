@@ -2,13 +2,106 @@
 @tailwind components;
 @tailwind utilities;
 
-body { font-family: 'Inter', 'system-ui', sans-serif; }
+@layer base {
+  html {
+    color-scheme: light;
+    background: #f8fafc;
+  }
 
-.sidebar-link.active {
-  background: rgba(255,255,255,0.1);
-  border-right: 3px solid #f97316;
+  html.dark {
+    color-scheme: dark;
+    background: #020617;
+  }
+
+  body {
+    font-family: 'Inter', 'system-ui', sans-serif;
+    @apply bg-slate-50 text-slate-900 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
 }
-.sidebar-link:hover:not(.active) { background: rgba(255,255,255,0.05); }
+
+@layer components {
+  .app-bg {
+    @apply min-h-screen bg-slate-50 text-slate-900 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100;
+  }
+
+  .app-gradient-bg {
+    @apply min-h-screen bg-gradient-to-br from-slate-100 via-white to-orange-50 text-slate-900 transition-colors duration-200 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100;
+  }
+
+  .app-header {
+    @apply bg-white/85 text-slate-900 border-gray-300 backdrop-blur-md transition-colors duration-200 dark:bg-slate-950/85 dark:text-slate-100 dark:border-slate-800;
+  }
+
+  .app-card {
+    @apply bg-white text-slate-900 border-gray-300 transition-colors duration-200 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-700;
+  }
+
+  .app-subtle {
+    @apply bg-gray-50 text-slate-800 transition-colors duration-200 dark:bg-slate-800 dark:text-slate-200;
+  }
+
+  .app-track {
+    @apply bg-gray-100 transition-colors duration-200 dark:bg-slate-800;
+  }
+
+  .app-divider {
+    @apply border-gray-200 transition-colors duration-200 dark:border-slate-700;
+  }
+
+  .app-title {
+    @apply text-slate-900 dark:text-white;
+  }
+
+  .app-body {
+    @apply text-slate-700 dark:text-slate-300;
+  }
+
+  .app-muted {
+    @apply text-slate-600 dark:text-slate-400;
+  }
+
+  .app-faint {
+    @apply text-slate-500 dark:text-slate-500;
+  }
+
+  .app-label {
+    @apply text-slate-600 dark:text-slate-300;
+  }
+
+  .app-table-head {
+    @apply bg-gray-50 transition-colors duration-200 dark:bg-slate-800;
+  }
+
+  .app-row-hover {
+    @apply hover:bg-gray-50/50 dark:hover:bg-slate-800/50;
+  }
+
+  .app-input {
+    @apply bg-white text-slate-900 border-slate-300 placeholder:text-slate-400 transition-colors duration-200 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-700 dark:placeholder:text-slate-500;
+  }
+
+  .sidebar-shell {
+    @apply bg-white text-slate-700 border-r border-gray-200 transition-colors duration-200 dark:bg-slate-900 dark:text-slate-200 dark:border-slate-800;
+  }
+
+  .sidebar-link {
+    @apply text-slate-600 dark:text-slate-300;
+  }
+
+  .sidebar-link.active {
+    @apply bg-orange-50 text-orange-700 dark:bg-orange-500/15 dark:text-orange-300;
+    border-right: 3px solid #f97316;
+  }
+
+  .sidebar-link:hover:not(.active) {
+    @apply bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white;
+  }
+}
+
 .sidebar-nav::-webkit-scrollbar { display: none; }
 .sidebar-nav { -ms-overflow-style: none; scrollbar-width: none; }
 

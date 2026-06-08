@@ -1,10 +1,21 @@
 import { create } from 'zustand'
 
+const THEME_KEY = 'theme'
+const THEMES = new Set(['light', 'dark'])
+
 const getInitialTheme = () => {
   if (typeof window !== 'undefined') {
-    return localStorage.getItem('theme') || 'light'
+    const saved = localStorage.getItem(THEME_KEY)
+    return THEMES.has(saved) ? saved : 'light'
   }
   return 'light'
+}
+
+const applyTheme = (theme) => {
+  if (typeof document === 'undefined') return
+  document.documentElement.classList.toggle('dark', theme === 'dark')
+  document.documentElement.dataset.theme = theme
+  document.documentElement.style.colorScheme = theme
 }
 
 export const useStore = create((set, get) => ({
@@ -29,21 +40,20 @@ export const useStore = create((set, get) => ({
   setProgress: (p) => set({ progress: p }),
   setActiveSection: (s) => set({ activeSection: s }),
 
-  toggleTheme: () => {
-    const next = get().theme === 'dark' ? 'light' : 'dark'
-    localStorage.setItem('theme', next)
-    if (next === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
+  setTheme: (theme) => {
+    const next = THEMES.has(theme) ? theme : 'light'
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(THEME_KEY, next)
     }
+    applyTheme(next)
     set({ theme: next })
   },
 
+  toggleTheme: () => get().setTheme(get().theme === 'dark' ? 'light' : 'dark'),
+
   initTheme: () => {
-    const t = get().theme
-    if (t === 'dark') {
-      document.documentElement.classList.add('dark')
-    }
+    const theme = getInitialTheme()
+    applyTheme(theme)
+    set({ theme })
   },
 }))

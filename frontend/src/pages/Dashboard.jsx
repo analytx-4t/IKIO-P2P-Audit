@@ -43,10 +43,10 @@ export default function Dashboard() {
   const sectionData = results?.[activeSection] || {}
 
   return (
-    <div className="flex min-h-screen">
+    <div className="app-bg flex">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <div className="flex-1 lg:ml-64">
+      <div className="flex-1 lg:ml-64 min-w-0">
         <Header onMenuClick={() => setSidebarOpen(true)} />
         <main className="p-4 lg:p-8 max-w-7xl mx-auto">
           <div className="page-section">

@@ -13,19 +13,19 @@ export default function DataTable({ title, rows = [], maxRows = 15 }) {
   const scrollable = rows.length > maxRows
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 overflow-hidden mb-4">
-      <div className="px-5 py-3 border-b border-gray-200 dark:border-slate-700 flex items-center justify-between">
-        <h4 className="text-sm font-semibold text-slate-900 dark:text-white">{title}</h4>
-        <span className="text-[10px] text-slate-500 dark:text-slate-400">
+    <div className="app-card rounded-xl border overflow-hidden mb-4">
+      <div className="px-5 py-3 border-b app-divider flex items-center justify-between">
+        <h4 className="text-sm font-semibold app-title">{title}</h4>
+        <span className="text-[10px] app-muted">
           {rows.length.toLocaleString()} rows
         </span>
       </div>
       <div className={scrollable ? 'overflow-auto max-h-96' : 'overflow-x-auto'}>
         <table className="w-full text-xs">
-          <thead className="bg-gray-50 dark:bg-slate-800">
+          <thead className="app-subtle">
             <tr>
               {cols.map(c => (
-                <th key={c} className="text-left px-3 py-2 text-[10px] font-semibold text-slate-600 dark:text-slate-300 uppercase whitespace-nowrap">
+                <th key={c} className="text-left px-3 py-2 text-[10px] font-semibold app-label uppercase whitespace-nowrap">
                   {c}
                 </th>
               ))}
@@ -33,9 +33,9 @@ export default function DataTable({ title, rows = [], maxRows = 15 }) {
           </thead>
           <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
             {rows.map((row, i) => (
-              <tr key={i} className="hover:bg-gray-50/50 dark:hover:bg-slate-800/50">
+              <tr key={i} className="app-row-hover">
                 {cols.map(c => (
-                  <td key={c} className="px-3 py-2 text-slate-700 dark:text-slate-200 whitespace-nowrap">
+                  <td key={c} className="px-3 py-2 app-body whitespace-nowrap">
                     {row[c]}
                   </td>
                 ))}

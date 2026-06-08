@@ -14,8 +14,8 @@ export default function PoStatus({ data }) {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-white">Purchase Order Status Analysis</h2>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">Open vs Closed PO analysis by vendor</p>
+        <h2 className="text-xl font-bold app-title">Purchase Order Status Analysis</h2>
+        <p className="text-sm app-muted mt-0.5">Open vs Closed PO analysis by vendor</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
@@ -29,9 +29,9 @@ export default function PoStatus({ data }) {
           { label: '% Open Value',   value: `${kpis.pct_open_value ?? 0}%` },
           { label: 'Top Vendor Open',value: `${kpis.top_vendor_open ?? 0} POs` },
         ].map(k => (
-          <div key={k.label} className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-4">
-            <div className="text-[10px] font-medium text-slate-600 dark:text-slate-300 uppercase">{k.label}</div>
-            <div className={`text-xl font-bold ${k.color || 'text-slate-900 dark:text-white'}`}>
+          <div key={k.label} className="app-card rounded-xl border p-4">
+            <div className="text-[10px] font-medium app-label uppercase">{k.label}</div>
+            <div className={`text-xl font-bold ${k.color || 'app-title'}`}>
               {(k.value ?? '—').toLocaleString?.() ?? k.value}
             </div>
           </div>
@@ -39,8 +39,8 @@ export default function PoStatus({ data }) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">PO Status Distribution</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-4">PO Status Distribution</h3>
           <div className="flex items-center justify-center mb-4">
             <DonutChart
               segments={(ps.segments || []).map(s => ({
@@ -67,15 +67,15 @@ export default function PoStatus({ data }) {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-gray-300 dark:border-slate-700 p-5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">PO Value (₹ Crores)</h3>
+        <div className="app-card rounded-xl border p-5">
+          <h3 className="text-sm font-semibold app-title mb-4">PO Value (₹ Crores)</h3>
           <div className="space-y-4 mt-8">
             <div>
               <div className="flex justify-between text-sm mb-1">
                 <span>Closed Value</span>
                 <span className="font-semibold dark:text-white">₹{pv.closed?.value_cr ?? 0} Cr</span>
               </div>
-              <div className="bg-gray-100 dark:bg-slate-800 rounded-full h-7 overflow-hidden">
+              <div className="app-track rounded-full h-7 overflow-hidden">
                 <div className="h-full rounded-full bg-emerald-500 flex items-center justify-end pr-3"
                   style={{ width: `${pv.closed?.pct ?? 0}%` }}>
                   <span className="text-[11px] font-bold text-white">{pv.closed?.pct ?? 0}%</span>
@@ -87,7 +87,7 @@ export default function PoStatus({ data }) {
                 <span>Open Value</span>
                 <span className="font-semibold dark:text-white">₹{pv.open?.value_cr ?? 0} Cr</span>
               </div>
-              <div className="bg-gray-100 dark:bg-slate-800 rounded-full h-7 overflow-hidden">
+              <div className="app-track rounded-full h-7 overflow-hidden">
                 <div className="h-full rounded-full bg-amber-500 flex items-center justify-end pr-3"
                   style={{ width: `${Math.max(pv.open?.pct ?? 0, 1)}%` }}>
                   <span className="text-[11px] font-bold text-white">{pv.open?.pct ?? 0}%</span>

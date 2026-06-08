@@ -23,17 +23,17 @@ export default function Header({ onMenuClick }) {
   const title = SECTION_TITLES[activeSection] || activeSection
 
   return (
-    <header className="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-gray-300 dark:border-slate-700">
+    <header className="app-header sticky top-0 z-30 border-b">
       <div className="flex items-center justify-between px-4 lg:px-8 h-14">
         <div className="flex items-center gap-4">
-          <button onClick={onMenuClick} className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800">
+          <button onClick={onMenuClick} className="lg:hidden p-2 rounded-lg app-row-hover">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
           </button>
           <div>
-            <h1 className="text-base font-semibold text-slate-900 dark:text-white">{title}</h1>
-            <p className="text-xs text-slate-600 dark:text-slate-400">IKIO Technologies Limited</p>
+            <h1 className="text-base font-semibold app-title">{title}</h1>
+            <p className="text-xs app-muted">IKIO Technologies Limited</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -41,7 +41,7 @@ export default function Header({ onMenuClick }) {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             All Data Verified
           </span>
-          <span className="text-xs text-slate-500">vFinal</span>
+          <span className="text-xs app-faint">vFinal</span>
         </div>
       </div>
     </header>

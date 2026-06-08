@@ -11,8 +11,8 @@ import React from 'react'
 export default function BarRow({ label, value, pct, color = 'bg-brand-600', labelWidth = 'w-28' }) {
   return (
     <div className="flex items-center gap-2">
-      <span className={`text-xs text-slate-600 dark:text-slate-400 ${labelWidth}`}>{label}</span>
-      <div className="flex-1 bg-gray-100 dark:bg-slate-800 rounded-full h-5 overflow-hidden">
+      <span className={`text-xs app-muted ${labelWidth}`}>{label}</span>
+      <div className="flex-1 app-track rounded-full h-5 overflow-hidden">
         <div
           className={`h-full rounded-full ${color} flex items-center justify-end pr-2`}
           style={{ width: `${Math.max(pct, 1)}%` }}
