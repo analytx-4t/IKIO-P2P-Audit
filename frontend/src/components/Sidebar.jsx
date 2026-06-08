@@ -1,0 +1,84 @@
+import React from 'react'
+import { useStore } from '../store'
+import ThemeToggle from './ThemeToggle'
+
+const LINKS = [
+  { id: 'cover',        label: 'Cover',                icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z' },
+  { id: 'executive',    label: 'Executive Dashboard',  icon: 'M13 10V3L4 14h7v7l9-11h-7z' },
+  { id: 'postatus',     label: 'PO Status Analysis',   icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+  { id: 'gateentry',    label: 'Gate Entry Date Check', icon: 'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4' },
+  { id: 'qtyvariance',  label: 'Quantity Variance',    icon: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z' },
+  { id: 'pricevariance',label: 'Price Variance & Savings', icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
+  { id: 'glbalances',   label: 'GL Vendor Balances',   icon: 'M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z' },
+  { id: 'paymentaging', label: 'Payment Aging',        icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+  { id: 'msme',         label: 'MSME Compliance',      icon: 'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16' },
+  { id: 'vendormaster', label: 'Vendor Master',        icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z' },
+  { id: 'grpoexcept',   label: 'GRPO Exceptions',      icon: 'M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636' },
+  { id: 'threeway',     label: '3-Way Matching',       icon: 'M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
+  { id: 'datamap',      label: 'Data Map & Logic',     icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2' },
+  { id: 'appendix',     label: 'Appendix',             icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253' },
+]
+
+export default function Sidebar({ open, onClose }) {
+  const { activeSection, setActiveSection } = useStore()
+
+  const handleClick = (id) => {
+    setActiveSection(id)
+    if (window.innerWidth < 1024) onClose()
+  }
+
+  return (
+    <>
+      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-700 text-white transform transition-transform duration-300 flex flex-col ${open ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
+        <div className="px-6 py-5 border-b border-slate-600/40">
+          <div className="flex items-center gap-3">
+            <div className="w-14 h-14 rounded-lg flex items-center justify-center overflow-hidden">
+              <img src="/ikio.png" alt="IKIO" className="w-full h-full object-contain" />
+            </div>
+            <div>
+              <div className="text-sm font-bold tracking-wide">IKIO</div>
+              <div className="text-[10px] text-slate-400 uppercase tracking-wider">P2P Audit</div>
+            </div>
+          </div>
+        </div>
+
+        <nav className="sidebar-nav flex-1 py-4 overflow-y-auto">
+          <div className="px-4 mb-2 text-[10px] font-semibold text-slate-500 uppercase tracking-widest">
+            Report Sections
+          </div>
+          {LINKS.map(link => (
+            <a
+              key={link.id}
+              href="#"
+              onClick={e => { e.preventDefault(); handleClick(link.id) }}
+              className={`sidebar-link flex items-center gap-3 px-5 py-2.5 text-sm text-slate-300 transition-all${activeSection === link.id ? ' active' : ''}`}
+            >
+              <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d={link.icon} />
+              </svg>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="px-5 py-4 border-t border-slate-600/40">
+          <ThemeToggle />
+          <div className="mt-3 flex items-center justify-between">
+            <div>
+              <div className="text-[10px] text-slate-500 uppercase tracking-wider">Audit Period</div>
+              <div className="text-xs text-slate-300 font-medium">FY 2026-27</div>
+            </div>
+            <div className="text-[10px] text-slate-500">Confidential</div>
+          </div>
+        </div>
+      </aside>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+    </>
+  )
+}
