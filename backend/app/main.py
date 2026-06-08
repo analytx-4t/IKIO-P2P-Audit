@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import io
 import json
+import math
 from typing import Optional
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
@@ -17,6 +18,37 @@ from app.loaders import load_file
 from app.pipeline import run_pipeline
 from app.insights import generate_section_insight, generate_executive_summary
 from app.config import FILE_ROLES
+
+
+class SafeJSONEncoder(json.JSONEncoder):
+    """JSON encoder that safely handles NaN, infinity, and other special values."""
+    def encode(self, o):
+        if isinstance(o, float):
+            if math.isnan(o) or math.isinf(o):
+                return 'null'
+        return super().encode(o)
+    
+    def iterencode(self, o, _one_shot=False):
+        """Override iterencode to handle NaN and infinity in nested structures."""
+        for chunk in super().iterencode(o, _one_shot):
+            yield chunk
+
+
+def sanitize_for_json(obj):
+    """
+    Recursively sanitize objects to remove NaN and infinity values.
+    Converts them to None (null in JSON).
+    """
+    if isinstance(obj, float):
+        if math.isnan(obj) or math.isinf(obj):
+            return None
+        return obj
+    elif isinstance(obj, dict):
+        return {k: sanitize_for_json(v) for k, v in obj.items()}
+    elif isinstance(obj, (list, tuple)):
+        return [sanitize_for_json(item) for item in obj]
+    else:
+        return obj
 
 
 app = FastAPI(title="IKIO P2P Audit API", version="1.0.0")
@@ -109,7 +141,8 @@ async def analyze(session_id: str):
             item = await queue.get()
             if item is None:
                 break
-            yield {"data": json.dumps(item, default=str)}
+            sanitized = sanitize_for_json(item)
+            yield {"data": json.dumps(sanitized, default=str)}
 
         await task
 
