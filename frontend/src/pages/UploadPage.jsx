@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { uploadFiles, analyzeStream } from '../api'
 import { useStore } from '../store'
+import logo from '../assets/logo.jpeg'
 
 const FILE_SLOTS = [
   { role: 'vendor_master',    label: 'Vendor Master Sheet',  icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z' },
@@ -71,7 +72,7 @@ export default function UploadPage() {
       <div className="w-full max-w-3xl">
         <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center w-32 h-32 mb-4">
-            <img src="/ikio.png" alt="IKIO" className="w-28 h-28 object-contain" />
+            <img src={logo} alt="IKIO" className="w-28 h-28 object-contain" />
           </div>
           <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
             Upload Procurement Audit Data Files

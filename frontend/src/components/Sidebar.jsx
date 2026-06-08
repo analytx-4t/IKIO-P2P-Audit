@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStore } from '../store'
 import ThemeToggle from './ThemeToggle'
+import logo from '../assets/logo.jpeg'
 
 const LINKS = [
   { id: 'cover',        label: 'Cover',                icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z' },
@@ -33,7 +34,7 @@ export default function Sidebar({ open, onClose }) {
         <div className="px-6 py-5 border-b border-slate-600/40">
           <div className="flex items-center gap-3">
             <div className="w-14 h-14 rounded-lg flex items-center justify-center overflow-hidden">
-              <img src="/ikio.png" alt="IKIO" className="w-full h-full object-contain" />
+              <img src={logo} alt="IKIO" className="w-full h-full object-contain" />
             </div>
             <div>
               <div className="text-sm font-bold tracking-wide">IKIO</div>

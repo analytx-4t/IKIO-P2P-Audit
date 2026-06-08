@@ -1,5 +1,6 @@
 import React from 'react'
 import { useStore } from '../store'
+import logo from '../assets/logo.jpeg'
 
 export default function LoadingPage() {
   const { progress } = useStore()
@@ -9,7 +10,7 @@ export default function LoadingPage() {
     <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <div className="text-center">
         <div className="mb-6">
-          <img src="/ikio.png" alt="IKIO" className="w-20 h-20 object-contain mx-auto" />
+          <img src={logo} alt="IKIO" className="w-20 h-20 object-contain mx-auto" />
         </div>
 
         <div className="relative w-24 h-24 mx-auto mb-8">
