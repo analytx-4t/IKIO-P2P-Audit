@@ -1,6 +1,7 @@
 import React from 'react'
 import DonutChart from '../components/DonutChart'
 import DataTable from '../components/DataTable'
+import { BAR_COLORS, CHART_COLORS } from '../theme'
 
 export default function Msme({ data }) {
   const kpis   = data?.kpis   || {}
@@ -10,13 +11,13 @@ export default function Msme({ data }) {
   const donut    = charts.msme_donut     || { total: 0, segments: [] }
   const delayBars = charts.avg_delay_bars || []
 
-  const catColors = { MEDIUM: '#6366f1', MICRO: '#22c55e', N: '#f59e0b', SMALL: '#ef4444' }
+  const catColors = { MEDIUM: CHART_COLORS.info, MICRO: CHART_COLORS.success, N: CHART_COLORS.neutral, SMALL: CHART_COLORS.warning }
 
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold app-title">MSME Vendor Compliance</h2>
-        <p className="text-sm app-muted mt-0.5">MSMED Act §16 — 45-day payment rule for Micro &amp; Small enterprises</p>
+        <h2 className="section-title">MSME Vendor Compliance</h2>
+        <p className="section-subtitle">MSMED Act §16 — 45-day payment rule for Micro &amp; Small enterprises</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
@@ -25,20 +26,20 @@ export default function Msme({ data }) {
           { label: 'Small Invoices',    value: kpis.small_invoices },
           { label: 'Total MSME',        value: kpis.total_msme },
           { label: 'MSME Value',        value: `₹${kpis.msme_value_cr ?? 0} Cr` },
-          { label: '45-Day Breaches',   value: kpis.breaches,      color: 'text-rose-600' },
-          { label: 'Breach Value',      value: `₹${kpis.breach_val_cr ?? 0} Cr`, color: 'text-rose-600' },
-          { label: 'Indicative Penalty',value: `₹${kpis.penalty_l ?? 0} L`,      color: 'text-amber-600' },
-          { label: 'Breach Rate',       value: `${kpis.breach_rate ?? 0}%`,       color: 'text-rose-600' },
+          { label: '45-Day Breaches',   value: kpis.breaches,      color: 'metric-risk' },
+          { label: 'Breach Value',      value: `₹${kpis.breach_val_cr ?? 0} Cr`, color: 'metric-risk' },
+          { label: 'Indicative Penalty',value: `₹${kpis.penalty_l ?? 0} L`,      color: 'metric-warning' },
+          { label: 'Breach Rate',       value: `${kpis.breach_rate ?? 0}%`,       color: 'metric-risk' },
         ].map(k => (
-          <div key={k.label} className="app-card rounded-xl border p-4">
-            <div className="text-[10px] font-medium app-label uppercase">{k.label}</div>
-            <div className={`text-xl font-bold ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
+          <div key={k.label} className="app-card rounded-lg p-5">
+            <div className="app-label mb-3">{k.label}</div>
+            <div className={`metric-value ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="app-card rounded-xl border p-5">
+        <div className="app-card rounded-lg p-5">
           <h3 className="text-sm font-semibold app-title mb-4">Invoices by MSME Category</h3>
           <div className="flex items-center justify-center mb-4">
             <DonutChart
@@ -60,11 +61,11 @@ export default function Msme({ data }) {
           </div>
         </div>
 
-        <div className="app-card rounded-xl border p-5">
+        <div className="app-card rounded-lg p-5">
           <h3 className="text-sm font-semibold app-title mb-4">Average Payment Delay by Category</h3>
           <div className="space-y-3 mt-4">
             {delayBars.map((b, i) => {
-              const rowColors = ['bg-emerald-500', 'bg-teal-500', 'bg-cyan-500', 'bg-amber-500']
+              const rowColors = [BAR_COLORS.success, BAR_COLORS.info, BAR_COLORS.primary, BAR_COLORS.warning]
               return (
                 <div key={b['MSME Category']} className="flex items-center gap-3">
                   <span className="text-xs app-muted w-24">{b['MSME Category']}</span>

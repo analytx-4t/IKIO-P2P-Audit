@@ -35,8 +35,8 @@ const PROCESS_FLOW = [
   { n:1, c:'brand', title:'Purchase Order',    desc:'Buyer raises PO on vendor' },
   { n:2, c:'brand', title:'Gate Entry',         desc:'Security records truck arrival' },
   { n:3, c:'brand', title:'GRPO',               desc:'Goods receipt booked; stock updated' },
-  { n:4, c:'indigo', title:'AP Invoice',         desc:'Invoice posted against GRPO' },
-  { n:5, c:'indigo', title:'Payment (GL)',        desc:'Treasury releases payment' },
+  { n:4, c:'primary', title:'AP Invoice',         desc:'Invoice posted against GRPO' },
+  { n:5, c:'primary', title:'Payment (GL)',        desc:'Treasury releases payment' },
   { n:6, c:'slate', title:'Reconciliation',      desc:'3-way match verification' },
 ]
 
@@ -44,12 +44,12 @@ export default function DataMap() {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold app-title">Data Map, Joins &amp; Audit Logic</h2>
-        <p className="text-sm app-muted mt-0.5">Source files, process flow, table joins, and audit rules</p>
+        <h2 className="section-title">Data Map, Joins &amp; Audit Logic</h2>
+        <p className="section-subtitle">Source files, process flow, table joins, and audit rules</p>
       </div>
 
       {/* Source Files */}
-      <div className="app-card rounded-xl border overflow-hidden mb-6">
+      <div className="app-card rounded-lg overflow-hidden mb-6">
         <div className="px-6 py-4 border-b app-divider">
           <h3 className="text-sm font-semibold app-title">Source Files Used in Audit</h3>
         </div>
@@ -78,11 +78,11 @@ export default function DataMap() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         {/* P2P Process Flow */}
-        <div className="app-card rounded-xl border p-5">
+        <div className="app-card rounded-lg p-5">
           <h3 className="text-sm font-semibold app-title mb-3">P2P Process Flow</h3>
           <div className="space-y-2">
             {PROCESS_FLOW.map(s => {
-              const bg = s.c === 'brand' ? 'bg-brand-600' : s.c === 'indigo' ? 'bg-indigo-500' : 'bg-slate-500'
+              const bg = s.c === 'brand' || s.c === 'primary' ? 'bg-slate-600' : 'bg-slate-500'
               return (
                 <div key={s.n} className="flex items-center gap-3 p-2 app-subtle rounded-lg">
                   <span className={`w-6 h-6 rounded-full ${bg} text-white text-xs font-bold flex items-center justify-center flex-shrink-0`}>{s.n}</span>
@@ -97,7 +97,7 @@ export default function DataMap() {
         </div>
 
         {/* Joins */}
-        <div className="app-card rounded-xl border overflow-hidden">
+        <div className="app-card rounded-lg overflow-hidden">
           <div className="px-5 py-4 border-b app-divider">
             <h3 className="text-sm font-semibold app-title">Table-to-Table Joins</h3>
           </div>
@@ -113,7 +113,7 @@ export default function DataMap() {
               <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
                 {JOINS.map(j => (
                   <tr key={j.id}>
-                    <td className="px-4 py-2"><span className="text-xs font-semibold text-brand-600">{j.id}</span></td>
+                    <td className="px-4 py-2"><span className="text-xs font-semibold metric-info">{j.id}</span></td>
                     <td className="px-4 py-2 text-[11px] app-title">{j.a}</td>
                     <td className="px-4 py-2 text-[11px] app-muted">{j.b}</td>
                     <td className="px-4 py-2 text-[11px] app-muted font-mono hidden md:table-cell">{j.key}</td>
@@ -126,12 +126,12 @@ export default function DataMap() {
       </div>
 
       {/* Audit Logic */}
-      <div className="app-card rounded-xl border p-5">
+      <div className="app-card rounded-lg p-5">
         <h3 className="text-sm font-semibold app-title mb-3">Audit Logic Applied (A-J)</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {AUDIT_RULES.map(r => (
             <div key={r.id} className="flex items-start gap-2 p-2 rounded app-subtle">
-              <span className="w-5 h-5 rounded bg-brand-600 text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0">{r.id}</span>
+              <span className="w-5 h-5 rounded bg-slate-600 text-white text-[10px] font-bold flex items-center justify-center flex-shrink-0">{r.id}</span>
               <div>
                 <div className="text-xs font-semibold app-title">{r.title}</div>
                 <div className="text-[10px] app-muted">{r.desc}</div>

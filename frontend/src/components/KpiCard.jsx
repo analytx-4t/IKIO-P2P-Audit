@@ -2,24 +2,22 @@ import React from 'react'
 
 export default function KpiCard({ icon, label, value, sub, colorClass = 'app-title' }) {
   return (
-    <div className="app-card rounded-xl border p-4 hover:shadow-md transition-shadow">
+    <div className="app-card rounded-lg p-5 hover:-translate-y-0.5 hover:shadow-md transition-all">
       {icon && (
-        <div className="flex items-center justify-between mb-2">
-          <div className="w-9 h-9 rounded-lg bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center">
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <span className="app-label">{label}</span>
+          <div className="w-8 h-8 rounded-md bg-slate-50 text-slate-700 dark:bg-slate-900/40 dark:text-slate-200 flex items-center justify-center opacity-80">
             {icon}
           </div>
-          <span className="text-[10px] font-medium app-label uppercase tracking-wider">
-            {label}
-          </span>
         </div>
       )}
       {!icon && (
-        <div className="text-[10px] font-medium app-label uppercase tracking-wider mb-1">
+        <div className="app-label mb-3">
           {label}
         </div>
       )}
-      <div className={`text-xl font-bold ${colorClass}`}>{value ?? '—'}</div>
-      {sub && <div className="text-[11px] app-muted mt-0.5">{sub}</div>}
+      <div className={`metric-value ${colorClass}`}>{value ?? '—'}</div>
+      {sub && <div className="text-xs app-muted mt-2 leading-relaxed">{sub}</div>}
     </div>
   )
 }

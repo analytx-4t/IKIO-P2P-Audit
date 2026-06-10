@@ -13,8 +13,8 @@ export default function DataTable({ title, rows = [], maxRows = 15 }) {
   const scrollable = rows.length > maxRows
 
   return (
-    <div className="app-card rounded-xl border overflow-hidden mb-4">
-      <div className="px-5 py-3 border-b app-divider flex items-center justify-between">
+    <div className="app-card rounded-lg overflow-hidden mb-5">
+      <div className="px-5 py-4 border-b app-divider flex items-center justify-between">
         <h4 className="text-sm font-semibold app-title">{title}</h4>
         <span className="text-[10px] app-muted">
           {rows.length.toLocaleString()} rows
@@ -22,16 +22,16 @@ export default function DataTable({ title, rows = [], maxRows = 15 }) {
       </div>
       <div className={scrollable ? 'overflow-auto max-h-96' : 'overflow-x-auto'}>
         <table className="w-full text-xs">
-          <thead className="app-subtle">
+          <thead className="app-table-head">
             <tr>
               {cols.map(c => (
-                <th key={c} className="text-left px-3 py-2 text-[10px] font-semibold app-label uppercase whitespace-nowrap">
+                <th key={c} className="text-left px-3 py-2 app-label whitespace-nowrap">
                   {c}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
             {rows.map((row, i) => (
               <tr key={i} className="app-row-hover">
                 {cols.map(c => (

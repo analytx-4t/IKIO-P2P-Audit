@@ -46,9 +46,9 @@ export default function Dashboard() {
     <div className="app-bg flex">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <div className="flex-1 lg:ml-64 min-w-0">
+      <div className="flex-1 lg:ml-72 min-w-0">
         <Header onMenuClick={() => setSidebarOpen(true)} />
-        <main className="p-4 lg:p-8 max-w-7xl mx-auto">
+        <main className="px-4 py-5 sm:px-6 lg:px-10 lg:py-8 max-w-[1500px] mx-auto">
           <div className="page-section">
             <Section data={sectionData} results={results} />
           </div>

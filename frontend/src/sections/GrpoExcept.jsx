@@ -1,6 +1,7 @@
 import React from 'react'
 import DonutChart from '../components/DonutChart'
 import DataTable from '../components/DataTable'
+import { BAR_COLORS } from '../theme'
 
 export default function GrpoExcept({ data }) {
   const kpis   = data?.kpis   || {}
@@ -13,26 +14,26 @@ export default function GrpoExcept({ data }) {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold app-title">GRPO / Gate-Entry / Invoice Linkage Exceptions</h2>
-        <p className="text-sm app-muted mt-0.5">Breakdown of linkage gaps between GRPO, Gate Entry, and Invoice</p>
+        <h2 className="section-title">GRPO / Gate-Entry / Invoice Linkage Exceptions</h2>
+        <p className="section-subtitle">Breakdown of linkage gaps between GRPO, Gate Entry, and Invoice</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         {[
-          { label: 'GRPO No Invoice',  value: kpis.grpo_no_invoice, color: 'text-amber-600' },
-          { label: 'GE No GRPO',       value: kpis.ge_no_grpo,      color: 'text-rose-600' },
-          { label: 'Invoice No GE',    value: kpis.invoice_no_ge,   color: 'text-rose-600' },
-          { label: 'Total Exceptions', value: kpis.total_exceptions, color: 'text-rose-600' },
+          { label: 'GRPO No Invoice',  value: kpis.grpo_no_invoice, color: 'metric-warning' },
+          { label: 'GE No GRPO',       value: kpis.ge_no_grpo,      color: 'metric-risk' },
+          { label: 'Invoice No GE',    value: kpis.invoice_no_ge,   color: 'metric-risk' },
+          { label: 'Total Exceptions', value: kpis.total_exceptions, color: 'metric-risk' },
         ].map(k => (
-          <div key={k.label} className="app-card rounded-xl border p-4">
-            <div className="text-[10px] font-medium app-label uppercase">{k.label}</div>
-            <div className={`text-xl font-bold ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
+          <div key={k.label} className="app-card rounded-lg p-5">
+            <div className="app-label mb-3">{k.label}</div>
+            <div className={`metric-value ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="app-card rounded-xl border p-5">
+        <div className="app-card rounded-lg p-5">
           <h3 className="text-sm font-semibold app-title mb-4">Exceptions by Type</h3>
           <div className="flex items-center justify-center mb-4">
             <DonutChart
@@ -54,11 +55,11 @@ export default function GrpoExcept({ data }) {
           </div>
         </div>
 
-        <div className="app-card rounded-xl border p-5">
+        <div className="app-card rounded-lg p-5">
           <h3 className="text-sm font-semibold app-title mb-4">Visual Distribution</h3>
           <div className="space-y-3 mt-4">
             {vd.map((item, i) => {
-              const colors = ['bg-indigo-500', 'bg-amber-500', 'bg-red-500']
+              const colors = [BAR_COLORS.primary, BAR_COLORS.warning, BAR_COLORS.risk]
               return (
                 <div key={item.label}>
                   <div className="flex justify-between text-xs mb-1">

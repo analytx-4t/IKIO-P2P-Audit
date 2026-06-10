@@ -13,26 +13,26 @@ export default function ThreeWay({ data }) {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold app-title">3-Way Matching Exceptions</h2>
-        <p className="text-sm app-muted mt-0.5">PO vs GRPO vs Invoice comparison</p>
+        <h2 className="section-title">3-Way Matching Exceptions</h2>
+        <p className="section-subtitle">PO vs GRPO vs Invoice comparison</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         {[
           { label: 'Total Records',       value: kpis.total_records },
-          { label: 'Fully Matched',       value: kpis.fully_matched,   color: 'text-emerald-600' },
-          { label: 'Quantity Exceptions', value: kpis.qty_exceptions,  color: 'text-rose-600' },
-          { label: 'Rate Exceptions',     value: kpis.rate_exceptions, color: 'text-amber-600' },
+          { label: 'Fully Matched',       value: kpis.fully_matched,   color: 'metric-success' },
+          { label: 'Quantity Exceptions', value: kpis.qty_exceptions,  color: 'metric-risk' },
+          { label: 'Rate Exceptions',     value: kpis.rate_exceptions, color: 'metric-warning' },
         ].map(k => (
-          <div key={k.label} className="app-card rounded-xl border p-4">
-            <div className="text-[10px] font-medium app-label uppercase">{k.label}</div>
-            <div className={`text-xl font-bold ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
+          <div key={k.label} className="app-card rounded-lg p-5">
+            <div className="app-label mb-3">{k.label}</div>
+            <div className={`metric-value ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="app-card rounded-xl border p-5">
+        <div className="app-card rounded-lg p-5">
           <h3 className="text-sm font-semibold app-title mb-4">Matching Results</h3>
           <div className="flex items-center justify-center mb-4">
             <DonutChart
@@ -54,13 +54,13 @@ export default function ThreeWay({ data }) {
           </div>
         </div>
 
-        <div className="app-card rounded-xl border p-5">
+        <div className="app-card rounded-lg p-5">
           <h3 className="text-sm font-semibold app-title mb-4">PO vs GRPO Comparison</h3>
           <div className="grid grid-cols-3 gap-4 mt-4">
             {[
-              { label: 'Matched Correctly', value: pvg.matched,    bg: 'bg-emerald-50 dark:bg-slate-800', text: 'text-emerald-700 dark:text-emerald-300' },
-              { label: 'PO > GRPO',         value: pvg.po_gt_grpo, bg: 'bg-rose-50 dark:bg-slate-800',   text: 'text-rose-700 dark:text-rose-300' },
-              { label: 'PO < GRPO',         value: pvg.po_lt_grpo, bg: 'bg-amber-50 dark:bg-slate-800',  text: 'text-amber-700 dark:text-amber-300' },
+              { label: 'Matched Correctly', value: pvg.matched,    bg: 'bg-green-50 dark:bg-slate-800', text: 'metric-success' },
+              { label: 'PO > GRPO',         value: pvg.po_gt_grpo, bg: 'bg-rose-50 dark:bg-slate-800',  text: 'metric-risk' },
+              { label: 'PO < GRPO',         value: pvg.po_lt_grpo, bg: 'bg-amber-50 dark:bg-slate-800', text: 'metric-warning' },
             ].map(c => (
               <div key={c.label} className={`text-center ${c.bg} rounded-lg p-3`}>
                 <div className={`text-[10px] font-medium ${c.text}`}>{c.label}</div>
@@ -73,7 +73,7 @@ export default function ThreeWay({ data }) {
             {[
               { label: 'Total PO Qty',   value: pvg.total_po_qty },
               { label: 'Total GRPO Qty', value: pvg.total_grpo_qty },
-              { label: 'Short Receipt',  value: pvg.short_receipt, color: 'text-rose-600' },
+              { label: 'Short Receipt',  value: pvg.short_receipt, color: 'metric-risk' },
             ].map(r => (
               <div key={r.label} className="flex items-center justify-between">
                 <span className="text-xs app-faint">{r.label}</span>

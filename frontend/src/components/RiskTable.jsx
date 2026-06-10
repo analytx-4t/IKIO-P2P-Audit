@@ -1,16 +1,16 @@
 import React from 'react'
 
 const SEV_CLASSES = {
-  CRITICAL: 'bg-red-100 text-red-700 dark:bg-red-950/60 dark:text-red-300',
-  HIGH:     'bg-red-100 text-red-700 dark:bg-red-950/60 dark:text-red-300',
-  MEDIUM:   'bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300',
+  CRITICAL: 'bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300',
+  HIGH:     'bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300',
+  MEDIUM:   'bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300',
   LOW:      'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300',
 }
 
 export default function RiskTable({ risks = [] }) {
   if (!risks.length) return null
   return (
-    <div className="app-card rounded-xl border overflow-hidden">
+    <div className="app-card rounded-lg overflow-hidden">
       <div className="px-6 py-4 border-b app-divider">
         <h3 className="text-base font-semibold app-title">
           Top 10 Risks &amp; Recommended Actions
@@ -18,16 +18,16 @@ export default function RiskTable({ risks = [] }) {
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="app-subtle">
+          <thead className="app-table-head">
             <tr>
               {['ID','Risk','Magnitude','Severity','Action'].map(h => (
-                <th key={h} className="text-left px-4 py-3 text-[10px] font-semibold app-label uppercase">
+                <th key={h} className="text-left px-4 py-3 app-label">
                   {h}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
             {risks.map((r, i) => (
               <tr key={i} className="app-row-hover">
                 <td className="px-4 py-3 font-mono text-xs font-semibold app-body">

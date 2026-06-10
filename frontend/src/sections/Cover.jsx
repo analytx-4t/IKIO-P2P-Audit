@@ -28,30 +28,30 @@ export default function Cover({ data }) {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold app-title">IKIO Technologies Limited</h2>
-        <p className="text-sm app-muted mt-0.5">Procure-to-Pay (P2P) Comprehensive Audit Report — FY 2026-27</p>
+        <h2 className="section-title">IKIO Technologies Limited</h2>
+        <p className="section-subtitle">Procure-to-Pay (P2P) Comprehensive Audit Report — FY 2026-27</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {cards.map(c => (
-          <div key={c.label} className="app-card rounded-xl border p-5 hover:shadow-md transition-shadow">
+          <div key={c.label} className="app-card rounded-lg p-5 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[10px] font-medium app-label uppercase tracking-wider">
                 {c.label}
               </span>
             </div>
-            <div className={`text-2xl font-bold ${c.color}`}>{c.value}</div>
+            <div className={`metric-value ${c.color}`}>{c.value}</div>
             <div className="text-xs app-muted mt-0.5">{c.sub}</div>
           </div>
         ))}
       </div>
 
-      <div className="app-card rounded-xl border p-6">
+      <div className="app-card rounded-lg p-6">
         <h3 className="text-sm font-semibold app-title mb-4">Report Navigation</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
           {NAV_ITEMS.map(item => (
             <div key={item.n} className="flex items-center gap-2 p-2 rounded-lg app-subtle">
-              <span className={`w-6 h-6 rounded-md bg-${item.c === 'brand' ? 'brand-600' : 'slate-500'} text-white text-xs font-bold flex items-center justify-center flex-shrink-0`}>
+              <span className={`w-6 h-6 rounded-md bg-${item.c === 'brand' ? 'slate-600' : 'slate-500'} text-white text-xs font-bold flex items-center justify-center flex-shrink-0`}>
                 {item.n}
               </span>
               <span className="text-sm app-body">{item.label}</span>

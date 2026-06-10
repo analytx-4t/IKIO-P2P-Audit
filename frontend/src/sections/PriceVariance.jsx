@@ -10,26 +10,26 @@ export default function PriceVariance({ data }) {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold app-title">Price Variance &amp; Potential Cost Savings</h2>
-        <p className="text-sm app-muted mt-0.5">Items with &gt;5% price variance across vendors</p>
+        <h2 className="section-title">Price Variance &amp; Potential Cost Savings</h2>
+        <p className="section-subtitle">Items with &gt;5% price variance across vendors</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         {[
           { label: 'Items >5%',     value: kpis.items_above_5pct },
-          { label: 'Total Savings', value: `₹${kpis.total_saving_l ?? 0} L`, color: 'text-emerald-600' },
+          { label: 'Total Savings', value: `₹${kpis.total_saving_l ?? 0} L`, color: 'metric-success' },
           { label: 'Biggest Saving',value: kpis.biggest_saving != null ? `₹${(kpis.biggest_saving / 1e7).toFixed(2)} Cr` : '—' },
           { label: 'Rows Reviewed', value: kpis.rows_reviewed },
         ].map(k => (
-          <div key={k.label} className="app-card rounded-xl border p-4">
-            <div className="text-[10px] font-medium app-label uppercase">{k.label}</div>
-            <div className={`text-xl font-bold ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
+          <div key={k.label} className="app-card rounded-lg p-5">
+            <div className="app-label mb-3">{k.label}</div>
+            <div className={`metric-value ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
           </div>
         ))}
       </div>
 
       {top10.length > 0 && (
-        <div className="app-card rounded-xl border overflow-hidden mb-4">
+        <div className="app-card rounded-lg overflow-hidden mb-4">
           <div className="px-6 py-4 border-b app-divider">
             <h3 className="text-sm font-semibold app-title">Top 10 Items by Potential Savings</h3>
           </div>

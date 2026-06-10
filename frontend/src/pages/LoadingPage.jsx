@@ -16,7 +16,7 @@ export default function LoadingPage() {
         <div className="relative w-24 h-24 mx-auto mb-8">
           <svg className="spinner w-24 h-24" viewBox="0 0 100 100">
             <circle className="stroke-slate-200 dark:stroke-slate-800" cx="50" cy="50" r="42" fill="none" strokeWidth="6" />
-            <circle cx="50" cy="50" r="42" fill="none" stroke="#ea580c" strokeWidth="6"
+            <circle cx="50" cy="50" r="42" fill="none" stroke="#2563eb" strokeWidth="6"
               strokeLinecap="round" strokeDasharray="200 65" strokeDashoffset="0" />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
@@ -30,7 +30,7 @@ export default function LoadingPage() {
 
         <div className="w-72 mx-auto app-track rounded-full h-2 overflow-hidden">
           <div
-            className="progress-bar h-full bg-gradient-to-r from-orange-600 to-orange-400 rounded-full"
+            className="progress-bar h-full bg-gradient-to-r from-slate-700 to-slate-500 rounded-full"
             style={{ width: `${pct}%` }}
           />
         </div>

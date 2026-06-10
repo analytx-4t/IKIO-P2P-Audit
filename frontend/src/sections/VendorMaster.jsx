@@ -1,6 +1,7 @@
 import React from 'react'
 import DonutChart from '../components/DonutChart'
 import DataTable from '../components/DataTable'
+import { BAR_COLORS } from '../theme'
 
 export default function VendorMaster({ data }) {
   const kpis   = data?.kpis   || {}
@@ -9,31 +10,31 @@ export default function VendorMaster({ data }) {
 
   const exc   = charts.exceptions_donut || { total: 0, segments: [] }
   const msmeBars = charts.msme_bars || []
-  const msmeColors = ['bg-emerald-500', 'bg-cyan-500', 'bg-amber-500', 'bg-slate-500']
+  const msmeColors = [BAR_COLORS.success, BAR_COLORS.info, BAR_COLORS.warning, BAR_COLORS.neutral]
 
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-xl font-bold app-title">Vendor Master Validation</h2>
-        <p className="text-sm app-muted mt-0.5">Data quality: duplicates, missing GSTIN/PAN, and MSME registration</p>
+        <h2 className="section-title">Vendor Master Validation</h2>
+        <p className="section-subtitle">Data quality: duplicates, missing GSTIN/PAN, and MSME registration</p>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         {[
           { label: 'Total Vendors',  value: kpis.total_vendors },
-          { label: 'Duplicates',     value: kpis.duplicates,    color: 'text-rose-600' },
-          { label: 'Missing GSTIN',  value: kpis.missing_gstin, color: 'text-amber-600' },
-          { label: 'Missing PAN',    value: kpis.missing_pan,   color: 'text-amber-600' },
+          { label: 'Duplicates',     value: kpis.duplicates,    color: 'metric-risk' },
+          { label: 'Missing GSTIN',  value: kpis.missing_gstin, color: 'metric-warning' },
+          { label: 'Missing PAN',    value: kpis.missing_pan,   color: 'metric-warning' },
         ].map(k => (
-          <div key={k.label} className="app-card rounded-xl border p-4">
-            <div className="text-[10px] font-medium app-label uppercase">{k.label}</div>
-            <div className={`text-xl font-bold ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
+          <div key={k.label} className="app-card rounded-lg p-5">
+            <div className="app-label mb-3">{k.label}</div>
+            <div className={`metric-value ${k.color || 'app-title'}`}>{k.value ?? '—'}</div>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="app-card rounded-xl border p-5">
+        <div className="app-card rounded-lg p-5">
           <h3 className="text-sm font-semibold app-title mb-4">Data Quality Exceptions</h3>
           <div className="flex items-center justify-center mb-4">
             <DonutChart
@@ -55,7 +56,7 @@ export default function VendorMaster({ data }) {
           </div>
         </div>
 
-        <div className="app-card rounded-xl border p-5">
+        <div className="app-card rounded-lg p-5">
           <h3 className="text-sm font-semibold app-title mb-4">MSME Registration Distribution</h3>
           <div className="space-y-3 mt-4">
             {msmeBars.map((b, i) => (
